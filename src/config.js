@@ -1,1 +1,1 @@
-export const API="https://gocart-shopping-site.herokuapp.com/api"
+export const API=process.env.REACT_APP_API_URL
