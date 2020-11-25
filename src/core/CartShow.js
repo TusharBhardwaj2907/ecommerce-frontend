@@ -46,7 +46,7 @@ function CartShow({result , setRun=f=>f , run=undefined}) {
                         <h3 className="card-title" style={{fontFamily:"serifs"}}>{result.name}</h3><hr/>
                         <p id="cartDesc" className="card-subtitle" style={{fontFamily:"serifs"}}>{limit(result.description)}</p>		
                     </div>
-                    <img className="ml-3" src={`${API}/product/photo/${result._id}`} width="152" height="152"/>
+                    <img className="ml-3" src={`${API}/product/photo/${result._id}`} alt="something went wrong , please refresh.." width="152" height="152"/>
                 </div>
                 <div className="card-footer">
                     <div className="d-inline-block mr-md-5">

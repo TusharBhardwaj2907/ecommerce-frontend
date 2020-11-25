@@ -37,7 +37,7 @@ function ShowProduct({result}) {
                         <h2 className="card-title" style={{fontFamily:"cursive"}}>{result.name}</h2><hr/>
                         <p className="card-subtitle" style={{fontFamily:"cursive"}}>{result.description}</p>		
                     </div>
-                    <img className="ml-3" src={`${API}/product/photo/${result._id}`} width="152" height="152"/>
+                    <img className="ml-3" alt="something went wrong , please refresh.." src={`${API}/product/photo/${result._id}`} width="152" height="152"/>
                 </div>
                 <div className="card-footer">
                     <div className="d-inline-block mr-md-5">
