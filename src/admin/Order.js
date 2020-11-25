@@ -10,10 +10,12 @@ function Order() {
     const [orders , setorders] = useState([])
     const [status , setStatus] = useState([])
     const [showMenu , setShowMenu] = useState(false)
+    const [loading , setLoading] = useState(false)
 
     const {user , token} = isAuthenticated()
 
     const getOrders = (userId , t) =>{
+        setLoading(true)
         return fetch(`${API}/order/list/${userId}` , {
             method:"GET",
             headers:{
@@ -25,6 +27,7 @@ function Order() {
     }
 
     const editStatus = (userId , t , orderId , status) =>{
+        setLoading(true)
         return fetch(`${API}/order/${orderId}/status/${userId}` , {
             method:"PUT",
             headers:{
@@ -37,6 +40,7 @@ function Order() {
     }
 
     const getStatus = (userId , t) =>{
+        setLoading(true)
         return fetch(`${API}/order/status-value/${userId}` , {
             method:"GET",
             headers:{
@@ -49,12 +53,17 @@ function Order() {
 
     const listOfOrders = () =>{
         getOrders(user._id, token)
-        .then(data => setorders(data))
+        .then(data => {
+            setLoading(false)
+            setorders(data)
+        })
         .catch(err => console.log(err))
     }
     const loadStatus = () =>{
         getStatus(user._id, token)
-        .then(data => setStatus(data))
+        .then(data => {
+            setLoading(false)
+            setStatus(data)})
         .catch(err => console.log(err))
     }
 
@@ -63,6 +72,10 @@ function Order() {
         loadStatus()
     },[])
 
+    const showLoading =load =>(
+        load && <h5 className="container alert alert-info bg-dark" style={{color:"orange"}}>Loading...</h5>
+    )
+
     const showOrdersLength = (orders) =>{
         if(orders.length>0){
             return (
@@ -70,7 +83,7 @@ function Order() {
             )
         }else{
             return (
-                <h3 className="card-header bg-dark" style={{color:"orange"}}>No orders yet</h3>
+                <h3 className="card-header bg-dark" style={{color:"orange"}}>{loading ? "loading...":"No orders yet"}</h3>
             )
         }
     }
@@ -116,6 +129,7 @@ function Order() {
 
     return (
         <Layout title="Orders Page" description="Node React Ecommerce" className="container-fluid">
+                {showLoading(loading)}
                 <div className="card">
                     {showOrdersLength(orders)}
                     {orders.length>0 && orders.map((o,i)=>{

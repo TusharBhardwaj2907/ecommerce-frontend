@@ -26,7 +26,7 @@ function AdminDashboard() {
     return (
         <div>
             <Layout title="Dashboard" description={`Hello ${name}`} className="container-fluid">
-                <div className="row" style={{fontFamily:"cursive"}}>
+                <div className="row" style={{fontFamily:"serif"}}>
                     <div className="col-12 col-sm-4 mb-5">
                         {adminLinks()}
                     </div>

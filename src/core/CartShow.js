@@ -22,9 +22,9 @@ function CartShow({result , setRun=f=>f , run=undefined}) {
     }
 
     const showCartbuttonOption = ()=>{
-        return <div className="d-inline-block ml-4">
-            <div className="input-group mb-3">
-                <input type="number" className="form-control" style={{maxWidth:"70px"}}  value={count} onChange={adjustVolume(result._id)}/>
+        return <div className="d-inline-block ml-2">
+            <div className="input-group mb-3 ">
+                <input type="number" className="form-control" style={{maxWidth:"60px"}}  value={count} onChange={adjustVolume(result._id)}/>
             </div>
         </div>
     }
@@ -43,8 +43,8 @@ function CartShow({result , setRun=f=>f , run=undefined}) {
                 <div className="card pmd-card">
                 <div className="card-body d-flex flex-row">
                     <div className="media-body">
-                        <h3 className="card-title" style={{fontFamily:"cursive"}}>{result.name}</h3><hr/>
-                        <p id="cartDesc" className="card-subtitle" style={{fontFamily:"cursive"}}>{limit(result.description)}</p>		
+                        <h3 className="card-title" style={{fontFamily:"serifs"}}>{result.name}</h3><hr/>
+                        <p id="cartDesc" className="card-subtitle" style={{fontFamily:"serifs"}}>{limit(result.description)}</p>		
                     </div>
                     <img className="ml-3" src={`${API}/product/photo/${result._id}`} width="152" height="152"/>
                 </div>
@@ -54,9 +54,9 @@ function CartShow({result , setRun=f=>f , run=undefined}) {
                         <strong><h6 className="mt-2 mr-2 d-inline-block"> ₹ <strike style={{color:"red"}}>{result.price*2} </strike></h6></strong>
                     </div>
                     <div className="d-inline-block">
-                        <button onClick={()=>{removeFromCart(result._id) ; setRun(!run)}} className="btn btn-danger mt-2 mb-2 d-inline-block"><i className="fas fa-cart"></i>Remove</button>
+                        <button onClick={()=>{removeFromCart(result._id) ; setRun(!run)}} className="btn btn-danger mt-1 mb-2 d-inline-block"><i className="fas fa-cart"></i>Remove</button>
                         {showCartbuttonOption()}
-                        <Link to={`/product/${result._id}`}> <span className="d-inline-block ml-3"><button className="btn btn-dark" style={{color:"orange"}}><i className="fa fa-eye"></i>view</button></span></Link>
+                        <Link to={`/product/${result._id}`}> <span className="d-inline-block ml-2"><button className="btn btn-dark" style={{color:"orange"}}><i className="fa fa-eye"></i>view</button></span></Link>
                     </div>
                 </div>
             </div>

@@ -7,6 +7,7 @@ import {getSingleProduct , updateProduct} from './apiAdmin'
 
 
 const UpdateProduct = ({match}) =>{
+    const [loading , setLoading] = useState(false)
     const [values,setValues] = useState({
         name:'',
         description:'',
@@ -16,14 +17,13 @@ const UpdateProduct = ({match}) =>{
         shipping:'',
         quantity:'',
         photo:'',
-        loading:false,
         error:false,
         createdProduct:false,
         redirectToProfile:false,
         formData:''
     })
 
-    const {name,description,price,categories,category,quantity,loading,error,createdProduct,redirectToProfile,formData} = values
+    const {name,description,price,categories,category,quantity,error,createdProduct,redirectToProfile,formData} = values
 
     const {user,token} = isAuthenticated()
 
@@ -33,13 +33,18 @@ const UpdateProduct = ({match}) =>{
     },[])
 
     const init = (productId) =>{
+        setLoading(true)
         getSingleProduct(productId)
         .then(data=>{
-            console.log(data)
             setValues({...values ,name:data.name , description:data.description , price:data.price , shipping:data.shipping,quantity:data.quantity, category:data.category._id , formData:new FormData()})
             getCategory()    
+            setLoading(false)
         })     
-        .catch(err=>console.log(err))
+        .catch(err=>
+        {
+            setLoading(false)
+            setValues({...values , error:true , loading:false})
+        })
     }
 
     const getCategory = () =>{
@@ -60,6 +65,10 @@ const UpdateProduct = ({match}) =>{
         </div>
     )
 
+    const showLoading = (load)=>(
+        load && <h5 className="container alert alert-info">loading...</h5>
+    )
+
     const showSuccess = () =>(
         <div className="alert alert-info" style={{display:createdProduct?'':'none'}}>
             <h2>Product is updated</h2>
@@ -68,12 +77,15 @@ const UpdateProduct = ({match}) =>{
 
     const clickSubmit=(e)=>{
         e.preventDefault()
+        setLoading(true)
         setValues({...values , error:true,createdProduct:false, loading:true})
         updateProduct( match.params.productId , user._id,token,formData)
         .then(data => {
             if(data.error){
+                setLoading(false)
                 setValues({...values , error:true , createdProduct:false})
             }else{
+                setLoading(false)
                 setValues({...values , name:'',description:'',
                 error:false,
                 photo:'',
@@ -142,6 +154,7 @@ const UpdateProduct = ({match}) =>{
             <div className="row">
                 <div className="col-md-8 offset-md-2">
                     {showError()}
+                    {loading && showLoading(loading)}
                     {showSuccess()}
                     {newPostForm()}
                 </div>

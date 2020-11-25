@@ -7,7 +7,7 @@ function Layout(props) {
     return (
         <div>
             <Menu/>
-            <div className="jumbotron bg-dark container-fluid" style={{borderRadius:"0px" ,color:"orange" , fontFamily:"cursive" , position:"relative"}}>
+            <div className="jumbotron bg-dark container-fluid" style={{borderRadius:"0px" ,color:"orange" , fontFamily:"serifs" , position:"relative"}}>
                 <h2>{props.title}</h2>
                 <q className="lead">{props.description}</q>
             </div>

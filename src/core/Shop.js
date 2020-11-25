@@ -1,11 +1,12 @@
 import React,{useState,useEffect} from 'react'
 import Layout from './Layout'
 import {API} from '../config'
-import {withRouter} from 'react-router-dom'
+import {withRouter , Link} from 'react-router-dom'
 import Checked from './Checked'
 import {prices} from './FixedPrices'
 import RadioBox from './RadioBox'
 import Card from './Card'
+
 
 
 function Shop(props) {
@@ -52,18 +53,23 @@ function Shop(props) {
         })
     }
 
+
     const loadMore=(newFilters)=>{
+        setLoading(true)
         let toSkip = skip+limit
         getFiltersProduct(toSkip,limit,newFilters.filters).then(data=>{
             if(data.error){
                 setError(data.error)
             }else{
+                setLoading(false)
                 setFiltered(data)
                 setSize(data.size)
                 setSkip(0)
             }
         })
     }
+
+    
 
     const getCategory = () =>{
         return fetch(`${API}/category` , {
@@ -127,7 +133,7 @@ function Shop(props) {
     }
 
     const showLoading = (loading) =>(
-        loading && <h5 className="container">loading...</h5>
+        loading && <h5 className="container alert alert-info bg-dark" style={{color:"orange"}}>loading...</h5>
     )
 
     const show = showMenu ? "show": ""
@@ -169,7 +175,6 @@ function Shop(props) {
                 <div className="col-12 col-sm-9">
                     <h4 className="mb-4">Products</h4>
                     <div className="row text-center">
-                        {filtered.length===0 && loading && showLoading(loading)}
                         {filtered.length===0 && !loading && notFound()}
                         {
                             filtered && filtered.map((product,i)=>(
@@ -180,8 +185,10 @@ function Shop(props) {
                         }
                     </div>
                     <hr/>
-                    {filtered.length===0 && <button className="btn btn-dark" style={{color:"orange"}} onClick={props.history.goBack} >back</button>}
-                        {filtered.length!==0 && filtered.length>=limit && (<button onClick={loadMore} className="btn btn-warning mb-5">Load More</button>)}
+                    {!loading && filtered.length===0 && <button className="btn btn-dark" style={{color:"orange"}} onClick={props.history.goBack} >back to home</button>}
+                        {!loading && filtered.length!==0 && filtered.length>=limit && (<button onClick={loadMore} className="btn btn-dark mb-5" style={{color:"orange"}}>Load More</button>)}
+                        {!loading && filtered.length<limit && <Link to="/"><button className="btn btn-dark" style={{color:"orange"}} >back to home</button></Link>}
+                        {loading && showLoading(loading)}
                 </div>
             </div>
         </Layout>

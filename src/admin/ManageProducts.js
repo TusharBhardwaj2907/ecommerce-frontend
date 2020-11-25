@@ -7,30 +7,47 @@ import {getProduct , deleteProduct } from '../admin/apiAdmin'
 function ManageProducts() {
 
     const [products , getProducts] = useState([])
-
+    const [loading , setLoading] = useState(false)
+    const [error , setError] = useState(false)
     const {user , token} =isAuthenticated()
 
     const loadProducts = () =>{
+        setLoading(true)
         getProduct()
         .then(data => {
             if(data.error){
-                console.log(data.error)
+                setLoading(false)
+                setError(true)
             }else{
+                setLoading(false)
+                setError(false)
                 getProducts(data)
             }
         })
     }
 
     const destroy = (productId) =>{
+        setLoading(true)
         deleteProduct(productId , user._id , token)
             .then(data => {
                 if(data.error){
-                    console.log(data.error)
+                    setLoading(false)
+                    setError(true)
                 }else{
+                    setLoading(false)
+                    setError(false)
                     loadProducts()
                 }
             })
     }
+
+    const showLoading = (load) =>(
+        load && <h5 className="container alert alert-danger bg-dark" style={{color:"orange"}}>Loading...</h5>
+    )
+
+    const showError = (er) =>(
+        er && <h5 className="container alert alert-danger">Something went wrong!!!</h5>
+    )
 
     useEffect(()=>{
         loadProducts()
@@ -38,6 +55,8 @@ function ManageProducts() {
 
     return (
         <Layout title="Update product Page" description="Node React Ecommerce" className="container-fluid">
+                {showLoading(loading)}
+                {showError(error)}
                 <h2 className="mb-4" style={{fontWeight:"700"}}>Update Products</h2>
                 <div className="row" style={{fontFamily:"cursive"}}>
                     <div className="col-12">

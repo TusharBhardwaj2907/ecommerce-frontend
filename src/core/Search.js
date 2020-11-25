@@ -101,7 +101,7 @@ function Search() {
             <span className="input-group-text bg-dark" style={{padding:"3px"}}>
                 <div className="input-group input-group-lg">
                     <div className="input-group-prepend">
-                        <select className="btn" onChange={handleChange("category")} style={{color:"orange"}}>
+                        <select className="btn" onChange={handleChange("category")} style={{color:"orange" , width:"100px"}}>
                             <option className="bg-dark" value="Category">all</option>
                             {categories.map((category,i)=>(
                                 <option key={i} value={category._id} className="bg-dark">{category.name}</option>

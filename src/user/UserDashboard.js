@@ -59,7 +59,7 @@ function UserDashboard() {
                                                 <div className="card pmd-card">
                                                     <div className="card-body d-flex flex-row">
                                                         <div className="media-body">
-                                                            <h5 className="card-title" style={{fontFamily:"cursive"}}>{p.name}</h5>	
+                                                            <h5 className="card-title" style={{fontFamily:"serif"}}>{p.name}</h5>	
                                                             <h6>price: ₹{p.price}</h6>
                                                             <h6>status : {h.status}</h6>
                                                         </div>
@@ -83,10 +83,10 @@ function UserDashboard() {
         <div>
             <Layout title="Dashboard" description={`Hello ${name}`} className="container-fluid">
                 <div className="row">
-                    <div className="col-12 col-sm-3 mb-5" style={{fontFamily:"cursive"}}>
+                    <div className="col-12 col-sm-3 mb-5" style={{fontFamily:"serif"}}>
                         {userLinks()}
                     </div>
-                    <div className="col-12 col-sm-9" style={{fontFamily:"cursive"}}>
+                    <div className="col-12 col-sm-9" style={{fontFamily:"serif"}}>
                         <div className="card mb-5 bg-dark">
                             <h3 className="card-header" style={{color:"orange"}}>User Information</h3>
                             <ul className="list-group">

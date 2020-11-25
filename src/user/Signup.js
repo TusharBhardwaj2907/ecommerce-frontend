@@ -45,7 +45,7 @@ function Signup() {
     }
     
     return (
-        <Layout title="Signup Page" className="container col-md-8 offset-md-2" description="Sign up to node react ecommerce app">
+        <Layout title="Signup Page" className="container col-md-8 offset-md-2" description="create your account">
             <div className="alert alert-danger" style={{display:error?'':"none"}}>
                 {error}
             </div>
@@ -65,7 +65,8 @@ function Signup() {
                     <label className="text-muted">Password</label>
                     <input type="password" onChange={handleChange('password')} value={password} className="form-control"/>
                 </div>
-                <button onClick={clickSubmit} className="btn btn-dark" style={{color:'orange'}}>Submit</button>
+                <button onClick={clickSubmit} className="btn btn-dark" style={{color:'orange'}}>create account</button>
+                <h6 className="mt-3">already have an account? <Link to="/signin" style={{color:"orange" , fontFamily:"serif"}}>click here</Link></h6>
             </form>
         </Layout>
     ) 
