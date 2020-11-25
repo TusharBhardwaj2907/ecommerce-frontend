@@ -16,7 +16,7 @@ const isActive = (history,path)=>{
 function Menu({history}) {
     return (
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" style={{position:"relative"}}>
-            <a className="navbar-brand" style={{color:"#ff9900", fontSize:"25px" , fontFamily:"serifs"}} href="/"><i className="fa fa-shopping-basket"></i>Radhey Supermart</a>
+            <a className="navbar-brand display-4" style={{color:"#ff9900" , fontFamily:"serifs"}} href="/"><i className="fa fa-shopping-basket"></i>Radhey Supermart</a>
             <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar"><span className="navbar-toggler-icon"></span></button>
         <div className="collapse navbar-collapse" id="navbar">
             <ul className="nav ">
