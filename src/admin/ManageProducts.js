@@ -54,11 +54,11 @@ function ManageProducts() {
     },[])
 
     return (
-        <Layout title="Update product Page" description="Node React Ecommerce" className="container-fluid">
+        <Layout title="Update product Page" description="your products" className="container-fluid">
                 {showLoading(loading)}
                 {showError(error)}
                 <h2 className="mb-4" style={{fontWeight:"700"}}>Update Products</h2>
-                <div className="row" style={{fontFamily:"cursive"}}>
+                <div className="row" style={{fontFamily:"serif"}}>
                     <div className="col-12">
                         <ul className="list-group">
                             {products.map((p , i) =>(

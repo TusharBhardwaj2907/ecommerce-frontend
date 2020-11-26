@@ -57,7 +57,7 @@ function Profile({match}) {
     }
 
     const profileUpdate = (name , email) =>(
-        <div className="card p-0" style={{fontFamily:"cursive"}}>
+        <div className="card p-0" style={{fontFamily:"serif"}}>
             <div className="card-body">
             <h2 className="mb-4  bg-dark card-header" style={{fontWeight:"700" , color:"orange"}}>Profile Update</h2>
             <form>
